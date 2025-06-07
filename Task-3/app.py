@@ -333,7 +333,9 @@ def main():
                     emotion = detect_emotion_direct(image, emotion_model)
                     nationality = predict_nationality(nationality_image, nationality_model)
                  
+                     
                     dress_color = None
+                        
 
                     if nationality == "Indian" or nationality == "African":
                         if face_bbox is not None:
@@ -343,14 +345,22 @@ def main():
                             dress_color = "Not Detected"
                         
 
-                    if age is not None and gender is not None:
-                        col2.markdown('<div class="sub-header">Results:</div>', unsafe_allow_html=True)
+                    col2.markdown('<div class="sub-header">Results:</div>', unsafe_allow_html=True)
 
+                    col2.markdown(
+                        f'<div class="result-text" style="background-color: rgba(234, 88, 12, 0.1);">Emotion: {emotion}</div>',
+                        unsafe_allow_html=True,
+                    )
+                    col2.markdown(
+                        f'<div class="result-text" style="background-color: rgba(20, 184, 166, 0.1);">Nationality: {nationality}</div>',
+                        unsafe_allow_html=True,
+                    )
+
+                    if nationality == "Indian":
                         col2.markdown(
                             f'<div class="result-text" style="background-color: rgba(37, 99, 235, 0.1);">Age: {age}</div>',
                             unsafe_allow_html=True,
                         )
-
                         gender_color = "#9F7AEA" if gender == "Female" else "#4F46E5"
                         col2.markdown(
                             f'<div class="result-text" style="background-color: rgba({", ".join(map(str, hex_to_rgb(gender_color)))}, 0.1);">'
@@ -360,23 +370,32 @@ def main():
                             unsafe_allow_html=True,
                         )
                         col2.markdown(
-                            f'<div class="result-text" style="background-color: rgba(234, 88, 12, 0.1);">Emotion: {emotion}</div>',
+                            f'<div class="result-text" style="background-color: rgba(255, 223, 186, 0.3);">Dress Color: {dress_color}</div>',
                             unsafe_allow_html=True,
                         )
+
+                    elif nationality == "American":
                         col2.markdown(
-                             f'<div class="result-text" style="background-color: rgba(20, 184, 166, 0.1);">Nationality: {nationality}</div>',
+                            f'<div class="result-text" style="background-color: rgba(37, 99, 235, 0.1);">Age: {age}</div>',
                             unsafe_allow_html=True,
                         )
-                        if dress_color:
-                            col2.markdown(
-                                f'<div class="result-text" style="background-color: rgba(255, 223, 186, 0.3);">Dress Color: {dress_color}</div>',
-                                unsafe_allow_html=True,
-                            )
+                        gender_color = "#9F7AEA" if gender == "Female" else "#4F46E5"
+                        col2.markdown(
+                            f'<div class="result-text" style="background-color: rgba({", ".join(map(str, hex_to_rgb(gender_color)))}, 0.1);">'
+                            f"Gender: {gender}<br>"
+                            f"<small>Confidence: {confidence:.2%}</small>"
+                            f"</div>",
+                            unsafe_allow_html=True,
+                        )
 
-                    else:
-                        col2.error("Failed to process this image")
+                    elif nationality == "African":
+                        col2.markdown(
+                            f'<div class="result-text" style="background-color: rgba(255, 223, 186, 0.3);">Dress Color: {dress_color}</div>',
+                            unsafe_allow_html=True,
+                        )
 
-                    st.markdown("</div>", unsafe_allow_html=True)
+# No extra fields shown for other nationalities
+
 
                     if i < len(uploaded_files) - 1:
                         st.markdown("<hr>", unsafe_allow_html=True)
