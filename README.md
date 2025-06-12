@@ -2,8 +2,8 @@ Age and Gender Detection Web App:
 
 A simple web app built with Streamlit that detects the age and gender of a person from an uploaded image or webcam input using a pre-trained deep learning model.
 
-![22_1_3_20170104231706746 jpg chip](https://github.com/user-attachments/assets/a3542b51-e769-49c2-bd85-db9dd0fc4b51)
-![23_0_1_20170113133833362 jpg chip](https://github.com/user-attachments/assets/1e684e3c-be16-4b9c-ab8c-9ba693587246)
+![image](https://github.com/user-attachments/assets/cdeefaa9-0d16-4308-b07f-1ca28d3a6193)
+![image](https://github.com/user-attachments/assets/4a1990da-676a-4b61-a50c-264debc7ec18)
 
 
  Features
