@@ -85,7 +85,7 @@ st.markdown(
 
 def load_emotion_model():
     try:
-        emotion_model_path = r"C:\Users\juli\emotion_model.h5"
+        emotion_model_path = r"D:\juli\Age-Gender-Detection\Task-3\emotion_model.h5"
         model = load_model(emotion_model_path)
         return model
     except Exception as e:
@@ -105,7 +105,7 @@ def load_age_gender_model():
 
 def load_nationality_model():
     try:
-        model_path = r"D:\juli\nationality_model.h5"  
+        model_path = r"D:\juli\Age-Gender-Detection\Task-3\nationality_model.h5"  
         model = tf.keras.models.load_model(model_path)
         return model
     except Exception as e:
@@ -155,8 +155,8 @@ def preprocess_age_gender_image(uploaded_image):
 def preprocess_nationality_image(uploaded_image):
     if uploaded_image.mode != "RGB":
         uploaded_image = uploaded_image.convert("RGB")
-    image = uploaded_image.resize((64, 64))  # Must match model input
-    image_array = np.array(image) / 255.0  # Normalize
+    image = uploaded_image.resize((128, 128)) 
+    image_array = np.array(image) / 255.0  
     return np.expand_dims(image_array, axis=0)  # Shape: (1, 64, 64, 3)
 
 
@@ -190,7 +190,7 @@ def predict_age_gender(model, image_array):
         return None, None, None
     
 def predict_nationality(image_array, model):
-    labels = ['African','American','Indian','Asian','Other']
+    labels = ['African','American','Asian','Indian','Other']
     prediction = model.predict(image_array)
     return labels[np.argmax(prediction)]
 
