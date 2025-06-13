@@ -4,7 +4,8 @@ import numpy as np
 import cv2
 import os
 import tensorflow as tf
-from keras.src.legacy.saving import legacy_h5_format
+from tensorflow.keras.models import load_model
+
 from keras.models import load_model
 from sklearn.cluster import KMeans
 
@@ -85,7 +86,7 @@ st.markdown(
 
 def load_emotion_model():
     try:
-        emotion_model_path = r"D:\juli\Age-Gender-Detection\Task-3\emotion_model.h5"
+        emotion_model_path = r"models\emotion_model.h5"
         model = load_model(emotion_model_path)
         return model
     except Exception as e:
@@ -94,10 +95,8 @@ def load_emotion_model():
 
 def load_age_gender_model():
     try:
-        model_path = r"C:\Users\juli\Downloads\Age_Sex_Detection.h5"
-        model = legacy_h5_format.load_model_from_hdf5(
-            model_path, custom_objects={"mae": "mae"}
-        )
+        model_path = r"models\Age_Sex_Detection.h5"
+        model = load_model(model_path, compile=False)
         return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
@@ -105,7 +104,7 @@ def load_age_gender_model():
 
 def load_nationality_model():
     try:
-        model_path = r"D:\juli\Age-Gender-Detection\Task-3\nationality_model.h5"  
+        model_path = r"models\nationality_model.h5"  
         model = tf.keras.models.load_model(model_path)
         return model
     except Exception as e:
